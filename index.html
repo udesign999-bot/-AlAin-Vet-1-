@@ -23,6 +23,23 @@ body{font-family:'Inter',system-ui,sans-serif;background:
 .marquee-track span{font-family:'Sora',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.3px;color:#0d1e12;margin-right:60px}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 
+/* LANGUAGE TOGGLE */
+.lang-bar{display:flex;justify-content:center;gap:6px;background:#101c26;padding:7px 10px;position:relative;z-index:49}
+.lang-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.75);font-family:'Sora',sans-serif;font-weight:700;font-size:11px;letter-spacing:.4px;padding:5px 14px;border-radius:16px;cursor:pointer}
+.lang-btn.active{background:var(--teal);border-color:var(--teal);color:#04211d}
+
+/* RTL SUPPORT */
+html[dir="rtl"] body{font-family:'Tahoma','Segoe UI',Arial,sans-serif}
+html[dir="rtl"] .marquee-track{animation-direction:reverse}
+html[dir="rtl"] .card .go{transform:scaleX(-1)}
+html[dir="rtl"] .back-btn .go,
+html[dir="rtl"] .back-btn{flex-direction:row-reverse}
+html[dir="rtl"] .qs-btn,html[dir="rtl"] .card,html[dir="rtl"] .urlbar{text-align:right}
+html[dir="rtl"] .modal-sec li{flex-direction:row-reverse}
+html[dir="rtl"] .coco-brand{left:auto;right:14px}
+html[dir="rtl"] .brand{right:auto;left:14px}
+html[dir="rtl"] .gift-fab,html[dir="rtl"] .gift-label{right:auto;left:14px}
+
 /* DEMO BANNER */
 .demo-banner{background:#1a2530;border-bottom:1px solid rgba(255,255,255,.1);text-align:center;padding:8px 16px;font-size:11.5px;line-height:1.5;color:#fff;position:relative;z-index:49}
 .demo-banner b{color:var(--gold)}
@@ -151,55 +168,61 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;paddi
 <!-- MARQUEE: BEST DEAL AVAILABLE -->
 <div class="marquee">
   <div class="marquee-track">
-    <span>🎁 BEST DEALS AVAILABLE AT SOUL VETERINARY CLINIC AL AIN — Fixed, fair pricing across every branch</span>
-    <span>💉 Ask about this month's vaccination &amp; wellness package offer</span>
-    <span>🐾 TNR &amp; community welfare special pricing available</span>
-    <span>🚗 Free pick-up &amp; drop-off support for selected visits</span>
-    <span>🎁 Tap the gift icon for this month's full offer list →</span>
+    <span data-i18n="mq1">🎁 BEST DEALS AVAILABLE AT SOUL VETERINARY CLINIC AL AIN — Fixed, fair pricing across every branch</span>
+    <span data-i18n="mq2">💉 Ask about this month's vaccination &amp; wellness package offer</span>
+    <span data-i18n="mq3">🐾 TNR &amp; community welfare special pricing available</span>
+    <span data-i18n="mq4">🚗 Free pick-up &amp; drop-off support for selected visits</span>
+    <span data-i18n="mq5">🎁 Tap the gift icon for this month's full offer list →</span>
   </div>
 </div>
 
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-ar" onclick="setLang('ar')">AR · عربي</button>
+</div>
+
 <!-- DEMO BANNER -->
-<div class="demo-banner"><b>⚠ DEMO WEBSITE</b> — please refer to the official Soul Vet website for full &amp; current details. Thank you.</div>
+<div class="demo-banner"><b data-i18n="demoTitle">⚠ DEMO WEBSITE</b> — <span data-i18n="demoBody">please refer to the official Soul Vet website for full &amp; current details. Thank you.</span></div>
 
 <!-- GIFT FAB -->
 <div class="gift-fab" onclick="openModal('m-offers')">🎁</div>
-<div class="gift-label">OFFERS</div>
+<div class="gift-label" data-i18n="giftLabel">OFFERS</div>
 
 <!-- HERO -->
 <div class="hero"><div class="hero-inner">
   <div class="clinic-logo-wrap">🐾</div>
-  <div class="clinic-name" id="clinicNameTap" onclick="tapName()">SOUL VETERINARY CLINIC AL AIN</div>
-  <div class="clinic-sub">Advanced Veterinary Care · Fair Prices · One Soul Standard</div>
+  <div class="clinic-name" id="clinicNameTap" onclick="tapName()" data-i18n="clinicName">SOUL VETERINARY CLINIC AL AIN</div>
+  <div class="clinic-sub" data-i18n="clinicSub">Advanced Veterinary Care · Fair Prices · One Soul Standard</div>
 
   <div class="highlights">
-    <span class="hl-badge hl-live"><span class="dot"></span>24/7 Helpline</span>
-    <span class="hl-badge">🦅 Falcon &amp; Exotic Care</span>
-    <span class="hl-badge">💰 Fixed Pricing</span>
-    <span class="hl-badge">🚗 Pick-Up &amp; Drop-Off</span>
-    <span class="hl-badge">🐾 TNR Community Care</span>
+    <span class="hl-badge hl-live"><span class="dot"></span><span data-i18n="hl1">24/7 Helpline</span></span>
+    <span class="hl-badge">🦅 <span data-i18n="hl2">Falcon &amp; Exotic Care</span></span>
+    <span class="hl-badge">💰 <span data-i18n="hl3">Fixed Pricing</span></span>
+    <span class="hl-badge">🚗 <span data-i18n="hl4">Pick-Up &amp; Drop-Off</span></span>
+    <span class="hl-badge">🐾 <span data-i18n="hl5">TNR Community Care</span></span>
   </div>
 
   <details class="about-toggle">
-    <summary>About Soul Vet <span class="chev">▾</span></summary>
+    <summary><span data-i18n="aboutTitle">About Soul Vet</span> <span class="chev">▾</span></summary>
     <div class="about-body">
-      <b>About Soul Vet</b> — Part of the Soul Vet Clinics network, built on one belief: pets deserve outstanding medical care in a place that feels warm, trustworthy and easy to access. Every branch runs on the same standard — experienced vets, modern equipment, transparent pricing and real love for animals, from routine check-ups to surgery and exotic/falcon care.
-      <div class="branches">📍 Branches: Al Ain · Ajman · Dubai &nbsp;·&nbsp; Founded by the Soul Vet team <span style="opacity:.7">(founding year &amp; founder name — confirm with clinic for this line)</span></div>
+      <b data-i18n="aboutTitle2">About Soul Vet</b> — <span data-i18n="aboutBody">Part of the Soul Vet Clinics network, built on one belief: pets deserve outstanding medical care in a place that feels warm, trustworthy and easy to access. Every branch runs on the same standard — experienced vets, modern equipment, transparent pricing and real love for animals, from routine check-ups to surgery and exotic/falcon care.</span>
+      <div class="branches">📍 <span data-i18n="branches">Branches: Al Ain · Ajman · Dubai</span> &nbsp;·&nbsp; <span data-i18n="foundedBy">Founded by the Soul Vet team</span> <span style="opacity:.7" data-i18n="foundedNote">(founding year &amp; founder name — confirm with clinic for this line)</span></div>
     </div>
   </details>
 
   <div class="quick-strip">
     <a class="qs-btn" href="tel:+971543495995">
       <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-      CALL US
+      <span data-i18n="callUs">CALL US</span>
     </a>
     <a class="qs-btn wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain!%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20ask%20about%20my%20pet." target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm4.6 14.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 1.9 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z"/></svg>
-      WHATSAPP
+      <span data-i18n="whatsappBtn">WHATSAPP</span>
     </a>
     <a class="qs-btn" href="https://www.google.com/maps?q=24.1639311,55.810108" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-      LOCATION
+      <span data-i18n="locationBtn">LOCATION</span>
     </a>
   </div>
 </div></div>
@@ -210,37 +233,37 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;paddi
 
     <a class="card" href="https://alain.soulvet.ae/" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="#14b8a6"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-3a15.6 15.6 0 0 0-1.3-3.9A8 8 0 0 1 18.9 8zM12 4c.8 1.1 1.6 2.5 2.1 4H9.9c.5-1.5 1.3-2.9 2.1-4zM4.3 14a8.2 8.2 0 0 1 0-4h3.4a17 17 0 0 0 0 4H4.3zm.8 2h3a15.6 15.6 0 0 0 1.3 3.9A8 8 0 0 1 5.1 16zm3-10H5.1a8 8 0 0 1 4.3-3.9A15.6 15.6 0 0 0 8.1 6zM12 20c-.8-1.1-1.6-2.5-2.1-4h4.2c-.5 1.5-1.3 2.9-2.1 4zm2.6-6H9.4a15 15 0 0 1 0-4h5.2a15 15 0 0 1 0 4zm.3 5.9a15.6 15.6 0 0 0 1.3-3.9h3a8 8 0 0 1-4.3 3.9zM16.3 14a17 17 0 0 0 0-4h3.4a8.2 8.2 0 0 1 0 4h-3.4z"/></svg>
-      <div class="cn">Official Website<div class="cs">alain.soulvet.ae — full details, always up to date</div></div>
+      <div class="cn"><span data-i18n="cardWebsite">Official Website</span><div class="cs" data-i18n="cardWebsiteSub">alain.soulvet.ae — full details, always up to date</div></div>
       <span class="go">›</span>
     </a>
 
     <button class="card" onclick="goTo('page-services')">
       <span class="ci">🩺</span>
-      <div class="cn">Our Services<div class="cs">Tap to view what we treat</div></div>
+      <div class="cn"><span data-i18n="cardServices">Our Services</span><div class="cs" data-i18n="cardServicesSub">Tap to view what we treat</div></div>
       <span class="go">›</span>
     </button>
 
     <a class="card" href="https://www.instagram.com/soulvetclinic/" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.2-.2.6-.3 1.7-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.2.1.6.2 1.7.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.2.2-.6.3-1.7.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.2-.1-.6-.2-1.7-.3-1.3-.1-1.7-.1-4.8-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 8.2a3.2 3.2 0 1 0 0-6.5 3.2 3.2 0 0 0 0 6.5zm6.4-8.4a1.2 1.2 0 1 1-2.3 0 1.2 1.2 0 0 1 2.3 0z"/></svg>
-      <div class="cn">Instagram<div class="cs">@soulvetclinic — follow for offers &amp; updates</div></div>
+      <div class="cn"><span data-i18n="cardInsta">Instagram</span><div class="cs" data-i18n="cardInstaSub">@soulvetclinic — follow for offers &amp; updates</div></div>
       <span class="go">›</span>
     </a>
 
     <a class="card" href="https://www.facebook.com/SoulVetClinicAjman/" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
-      <div class="cn">Facebook<div class="cs">Soul Veterinary Clinic — like the page</div></div>
+      <div class="cn"><span data-i18n="cardFb">Facebook</span><div class="cs" data-i18n="cardFbSub">Soul Veterinary Clinic — like the page</div></div>
       <span class="go">›</span>
     </a>
 
     <a class="card" href="https://www.tiktok.com/@soulvetclinic" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="#69C9D0"><path d="M19.6 6.7a5 5 0 0 1-3.6-1.6 5 5 0 0 1-1.2-2.4h-3.1v12.6a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.4a6.2 6.2 0 0 0-.9-.1 6 6 0 1 0 6 6V9.9a8 8 0 0 0 4.8 1.6V8.4c-.7 0-1.4-.1-2-.4v-1.3z"/></svg>
-      <div class="cn">TikTok<div class="cs">@soulvetclinic — watch clinic videos</div></div>
+      <div class="cn"><span data-i18n="cardTiktok">TikTok</span><div class="cs" data-i18n="cardTiktokSub">@soulvetclinic — watch clinic videos</div></div>
       <span class="go">›</span>
     </a>
 
     <a class="card" href="https://www.youtube.com/results?search_query=Soul+Vet+Clinic+Al+Ain" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C17.3 2.6 12 2.6 12 2.6h0s-5.3 0-8.3.3c-.5.1-1.5.1-2.3 1-.7.7-.9 2.3-.9 2.3S.2 8.1.2 10v1.9c0 1.9.3 3.8.3 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.3 7.6.3s5.3 0 8.3-.3c.5-.1 1.5-.1 2.3-1 .7-.7.9-2.3.9-2.3s.3-1.9.3-3.8V10c0-1.9-.3-3.8-.3-3.8zM9.7 14.5V7.7l6.5 3.4-6.5 3.4z"/></svg>
-      <div class="cn">YouTube<div class="cs">No official channel confirmed yet — searches for their videos</div></div>
+      <div class="cn"><span data-i18n="cardYt">YouTube</span><div class="cs" data-i18n="cardYtSub">No official channel confirmed yet — searches for their videos</div></div>
       <span class="go">›</span>
     </a>
 
@@ -248,111 +271,111 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;paddi
 
   <a class="review-box" href="https://www.google.com/maps/place/Soul+Veterinary+Clinic+Al+Ain+-+%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9+%D8%B3%D9%88%D9%84+%D8%A7%D9%84%D8%A8%D9%8A%D8%B7%D8%B1%D9%8A%D8%A9+%D8%A7%D9%84%D8%B9%D9%8A%D9%86%E2%80%AD/@24.1639755,55.8100609,21z/data=!4m12!1m5!3m4!2zMjTCsDA5JzUwLjIiTiA1NcKwNDgnMzYuNCJF!8m2!3d24.1639311!4d55.810108!3m5!1s0x3e8ab902e2517c47:0xa24fb4b2edc6fd49!8m2!3d24.1639311!4d55.810108!16s%2Fg%2F11jmlzzk71" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit">
     <div style="font-size:22px;letter-spacing:3px;margin-bottom:8px">⭐⭐⭐⭐⭐</div>
-    <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#fff">See Reviews &amp; Rate Us on Google Maps</div>
-    <div class="review-note">Tap to open Soul Veterinary Clinic Al Ain's Google listing — read reviews or leave your own</div>
+    <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:#fff" data-i18n="reviewTitle">See Reviews &amp; Rate Us on Google Maps</div>
+    <div class="review-note" data-i18n="reviewNote">Tap to open Soul Veterinary Clinic Al Ain's Google listing — read reviews or leave your own</div>
   </a>
-  <footer>🐾 Soul Veterinary Clinic Al Ain · UAE · QR experience by Coco Pet Care × U-Design</footer>
+  <footer>🐾 Soul Veterinary Clinic Al Ain · UAE · <span data-i18n="footerQr">QR experience by Coco Pet Care × U-Design</span></footer>
 </div>
 
 <!-- ===== SERVICES PAGE (main prices — no discount pricing, since offers change monthly) ===== -->
 <div id="page-services" class="page">
-  <button class="back-btn" onclick="goTo('page-main')">← Back</button>
+  <button class="back-btn" onclick="goTo('page-main')">← <span data-i18n="back">Back</span></button>
   <div class="list">
-    <button class="card svc-card" onclick="openModal('m-consult')"><span class="ci">🩺</span><div class="cn">General Consultation &amp; Health Checks<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-vaccine')"><span class="ci">💉</span><div class="cn">Vaccinations &amp; Preventive Care<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-surgery')"><span class="ci">🔬</span><div class="cn">Surgery<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-wellness')"><span class="ci">🧬</span><div class="cn">Wellness Exams<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-cardio')"><span class="ci">❤️</span><div class="cn">Cardiology<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-dental')"><span class="ci">🦷</span><div class="cn">Dental Care<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-grooming')"><span class="ci">🛁</span><div class="cn">Grooming<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-boarding')"><span class="ci">🏠</span><div class="cn">Boarding<div class="cs">Tap for details</div></div><span class="go">›</span></button>
-    <button class="card svc-card" onclick="openModal('m-pickup')"><span class="ci">🚗</span><div class="cn">Pick-Up &amp; Drop-Off Service<div class="cs">Convenience add-on · ask for coverage area</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-consult')"><span class="ci">🩺</span><div class="cn"><span data-i18n="svcConsult">General Consultation &amp; Health Checks</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-vaccine')"><span class="ci">💉</span><div class="cn"><span data-i18n="svcVaccine">Vaccinations &amp; Preventive Care</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-surgery')"><span class="ci">🔬</span><div class="cn"><span data-i18n="svcSurgery">Surgery</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-wellness')"><span class="ci">🧬</span><div class="cn"><span data-i18n="svcWellness">Wellness Exams</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-cardio')"><span class="ci">❤️</span><div class="cn"><span data-i18n="svcCardio">Cardiology</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-dental')"><span class="ci">🦷</span><div class="cn"><span data-i18n="svcDental">Dental Care</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-grooming')"><span class="ci">🛁</span><div class="cn"><span data-i18n="svcGrooming">Grooming</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-boarding')"><span class="ci">🏠</span><div class="cn"><span data-i18n="svcBoarding">Boarding</span><div class="cs" data-i18n="tapDetails">Tap for details</div></div><span class="go">›</span></button>
+    <button class="card svc-card" onclick="openModal('m-pickup')"><span class="ci">🚗</span><div class="cn"><span data-i18n="svcPickup">Pick-Up &amp; Drop-Off Service</span><div class="cs" data-i18n="svcPickupSub">Convenience add-on · ask for coverage area</div></div><span class="go">›</span></button>
   </div>
 </div>
 
 <!-- SERVICE MODALS -->
 <div id="m-consult" class="modal-overlay" onclick="if(event.target===this)closeById('m-consult')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🩺</span><h3>General Consultation</h3></div><button class="modal-close" onclick="closeById('m-consult')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Routine examination &amp; wellness visit</li><li>Preventive care advice</li><li>Ongoing health monitoring</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20a%20consultation." target="_blank">Book via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🩺</span><h3><span data-i18n="mTConsult">General Consultation</span></h3></div><button class="modal-close" onclick="closeById('m-consult')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLConsult1">Routine examination &amp; wellness visit</li><li data-i18n="mLConsult2">Preventive care advice</li><li data-i18n="mLConsult3">Ongoing health monitoring</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20a%20consultation." target="_blank"><span data-i18n="waBook">Book via WhatsApp</span></a></div>
 </div>
 
 <div id="m-vaccine" class="modal-overlay" onclick="if(event.target===this)closeById('m-vaccine')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">💉</span><h3>Vaccinations &amp; Preventive Care</h3></div><button class="modal-close" onclick="closeById('m-vaccine')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Protection against rabies, parvovirus, distemper &amp; more</li><li>Full physical exam</li><li>Vaccine record &amp; reminders</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20vaccination." target="_blank">Book via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">💉</span><h3><span data-i18n="mTVaccine">Vaccinations &amp; Preventive Care</span></h3></div><button class="modal-close" onclick="closeById('m-vaccine')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLVaccine1">Protection against rabies, parvovirus, distemper &amp; more</li><li data-i18n="mLVaccine2">Full physical exam</li><li data-i18n="mLVaccine3">Vaccine record &amp; reminders</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20vaccination." target="_blank"><span data-i18n="waBook">Book via WhatsApp</span></a></div>
 </div>
 
 <div id="m-surgery" class="modal-overlay" onclick="if(event.target===this)closeById('m-surgery')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🔬</span><h3>Surgery</h3></div><button class="modal-close" onclick="closeById('m-surgery')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Routine to advanced surgical procedures</li><li>Medical precision &amp; patient-safety protocols</li><li>Post-op care guidance</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20need%20surgery%20information." target="_blank">Enquire via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🔬</span><h3><span data-i18n="mTSurgery">Surgery</span></h3></div><button class="modal-close" onclick="closeById('m-surgery')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLSurgery1">Routine to advanced surgical procedures</li><li data-i18n="mLSurgery2">Medical precision &amp; patient-safety protocols</li><li data-i18n="mLSurgery3">Post-op care guidance</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20need%20surgery%20information." target="_blank"><span data-i18n="waEnquire">Enquire via WhatsApp</span></a></div>
 </div>
 
 <div id="m-wellness" class="modal-overlay" onclick="if(event.target===this)closeById('m-wellness')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🧬</span><h3>Wellness Exams</h3></div><button class="modal-close" onclick="closeById('m-wellness')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Complete physical examination</li><li>Health assessment</li><li>Preventive care plan</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20a%20wellness%20exam." target="_blank">Book via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🧬</span><h3><span data-i18n="mTWellness">Wellness Exams</span></h3></div><button class="modal-close" onclick="closeById('m-wellness')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLWellness1">Complete physical examination</li><li data-i18n="mLWellness2">Health assessment</li><li data-i18n="mLWellness3">Preventive care plan</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20a%20wellness%20exam." target="_blank"><span data-i18n="waBook">Book via WhatsApp</span></a></div>
 </div>
 
 <div id="m-cardio" class="modal-overlay" onclick="if(event.target===this)closeById('m-cardio')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">❤️</span><h3>Cardiology</h3></div><button class="modal-close" onclick="closeById('m-cardio')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Expert cardiac care</li><li>Early detection of heart conditions</li><li>Advanced treatment plans</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20need%20a%20cardiology%20consult." target="_blank">Enquire via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">❤️</span><h3><span data-i18n="mTCardio">Cardiology</span></h3></div><button class="modal-close" onclick="closeById('m-cardio')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLCardio1">Expert cardiac care</li><li data-i18n="mLCardio2">Early detection of heart conditions</li><li data-i18n="mLCardio3">Advanced treatment plans</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20need%20a%20cardiology%20consult." target="_blank"><span data-i18n="waEnquire">Enquire via WhatsApp</span></a></div>
 </div>
 
 <div id="m-dental" class="modal-overlay" onclick="if(event.target===this)closeById('m-dental')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🦷</span><h3>Dental Care</h3></div><button class="modal-close" onclick="closeById('m-dental')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Oral health assessment</li><li>Dental support &amp; cleaning</li><li>Long-term comfort care</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20dental%20care." target="_blank">Book via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🦷</span><h3><span data-i18n="mTDental">Dental Care</span></h3></div><button class="modal-close" onclick="closeById('m-dental')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLDental1">Oral health assessment</li><li data-i18n="mLDental2">Dental support &amp; cleaning</li><li data-i18n="mLDental3">Long-term comfort care</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20dental%20care." target="_blank"><span data-i18n="waBook">Book via WhatsApp</span></a></div>
 </div>
 
 <div id="m-grooming" class="modal-overlay" onclick="if(event.target===this)closeById('m-grooming')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🛁</span><h3>Grooming</h3></div><button class="modal-close" onclick="closeById('m-grooming')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Brushing &amp; sanitary trimming</li><li>Refreshing bath</li><li>Coat maintenance</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20grooming." target="_blank">Book via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🛁</span><h3><span data-i18n="mTGrooming">Grooming</span></h3></div><button class="modal-close" onclick="closeById('m-grooming')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLGrooming1">Brushing &amp; sanitary trimming</li><li data-i18n="mLGrooming2">Refreshing bath</li><li data-i18n="mLGrooming3">Coat maintenance</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20grooming." target="_blank"><span data-i18n="waBook">Book via WhatsApp</span></a></div>
 </div>
 
 <div id="m-boarding" class="modal-overlay" onclick="if(event.target===this)closeById('m-boarding')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🏠</span><h3>Boarding</h3></div><button class="modal-close" onclick="closeById('m-boarding')">✕</button>
-  <div class="modal-body"><div class="modal-sec"><h4>What's Included</h4><ul><li>Secure boarding</li><li>Constant supervision</li><li>Comfortable home-like environment</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20boarding." target="_blank">Book via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🏠</span><h3><span data-i18n="mTBoarding">Boarding</span></h3></div><button class="modal-close" onclick="closeById('m-boarding')">✕</button>
+  <div class="modal-body"><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLBoarding1">Secure boarding</li><li data-i18n="mLBoarding2">Constant supervision</li><li data-i18n="mLBoarding3">Comfortable home-like environment</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20would%20like%20to%20book%20boarding." target="_blank"><span data-i18n="waBook">Book via WhatsApp</span></a></div>
 </div>
 
 <div id="m-pickup" class="modal-overlay" onclick="if(event.target===this)closeById('m-pickup')">
-  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🚗</span><h3>Pick-Up &amp; Drop-Off</h3></div><button class="modal-close" onclick="closeById('m-pickup')">✕</button>
-  <div class="modal-body"><div class="modal-price">Ask for coverage &amp; fee</div><div class="modal-sec"><h4>What's Included</h4><ul><li>Convenient support for busy pet parents</li><li>Helps reduce stress for the pet</li><li>Available for consultations &amp; selected treatments</li></ul></div></div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20need%20pick-up%2Fdrop-off%20support." target="_blank">Ask via WhatsApp</a></div>
+  <div class="modal-card"><div class="modal-head"><span class="mh-icon">🚗</span><h3><span data-i18n="mTPickup">Pick-Up &amp; Drop-Off</span></h3></div><button class="modal-close" onclick="closeById('m-pickup')">✕</button>
+  <div class="modal-body"><div class="modal-price" data-i18n="pickupFee">Ask for coverage &amp; fee</div><div class="modal-sec"><h4 data-i18n="whatsIncluded">What's Included</h4><ul><li data-i18n="mLPickup1">Convenient support for busy pet parents</li><li data-i18n="mLPickup2">Helps reduce stress for the pet</li><li data-i18n="mLPickup3">Available for consultations &amp; selected treatments</li></ul></div></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20and%20need%20pick-up%2Fdrop-off%20support." target="_blank"><span data-i18n="waAsk">Ask via WhatsApp</span></a></div>
 </div>
 
 <!-- GIFT / OFFERS MODAL -->
 <div id="m-offers" class="modal-overlay" onclick="if(event.target===this)closeById('m-offers')">
-  <div class="modal-card"><div class="modal-head" style="background:rgba(245,185,66,.16);border-bottom-color:rgba(245,185,66,.24)"><span class="mh-icon">🎁</span><h3>This Month's Offers</h3></div><button class="modal-close" onclick="closeById('m-offers')">✕</button>
+  <div class="modal-card"><div class="modal-head" style="background:rgba(245,185,66,.16);border-bottom-color:rgba(245,185,66,.24)"><span class="mh-icon">🎁</span><h3 data-i18n="offersTitle">This Month's Offers</h3></div><button class="modal-close" onclick="closeById('m-offers')">✕</button>
   <div class="modal-body">
-    <div class="offer-item"><div class="ot">💉 Vaccination &amp; Wellness Package</div><div class="od">Ask about the current bundle price — Soul Vet rotates this offer monthly.</div></div>
-    <div class="offer-item"><div class="ot">🦷 Dental Care Special</div><div class="od">Seasonal discount on scaling &amp; polishing — confirm this week's rate on WhatsApp.</div></div>
-    <div class="offer-item"><div class="ot">🐾 Community TNR Pricing</div><div class="od">Special reduced pricing for trap-neuter-return community cats.</div></div>
-    <div class="offer-item"><div class="ot">🚗 Free Pick-Up &amp; Drop-Off</div><div class="od">On selected consultations &amp; follow-ups — ask if your visit qualifies.</div></div>
-    <div class="offer-note">Discount prices change often, so they're kept off the fixed services list — always confirm the live offer here or on WhatsApp before booking.</div>
+    <div class="offer-item"><div class="ot">💉 <span data-i18n="offer1t">Vaccination &amp; Wellness Package</span></div><div class="od" data-i18n="offer1d">Ask about the current bundle price — Soul Vet rotates this offer monthly.</div></div>
+    <div class="offer-item"><div class="ot">🦷 <span data-i18n="offer2t">Dental Care Special</span></div><div class="od" data-i18n="offer2d">Seasonal discount on scaling &amp; polishing — confirm this week's rate on WhatsApp.</div></div>
+    <div class="offer-item"><div class="ot">🐾 <span data-i18n="offer3t">Community TNR Pricing</span></div><div class="od" data-i18n="offer3d">Special reduced pricing for trap-neuter-return community cats.</div></div>
+    <div class="offer-item"><div class="ot">🚗 <span data-i18n="offer4t">Free Pick-Up &amp; Drop-Off</span></div><div class="od" data-i18n="offer4d">On selected consultations &amp; follow-ups — ask if your visit qualifies.</div></div>
+    <div class="offer-note" data-i18n="offerNote">Discount prices change often, so they're kept off the fixed services list — always confirm the live offer here or on WhatsApp before booking.</div>
   </div>
-  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20%E2%80%94%20what%27s%20this%20month%27s%20offer%3F" target="_blank">Ask About Today's Offer</a></div>
+  <a class="modal-wa" href="https://wa.me/971543495995?text=Hi%20Soul%20Veterinary%20Clinic%20Al%20Ain%2C%20I%20found%20you%20via%20the%20Coco%20Pet%20Care%20QR%20code%20%E2%80%94%20what%27s%20this%20month%27s%20offer%3F" target="_blank"><span data-i18n="offerBtn">Ask About Today's Offer</span></a></div>
 </div>
 
 <!-- ===== VIP EASTER-EGG PAGE (opens after 5 taps on clinic name) ===== -->
 <div id="page-vip" class="page">
-  <button class="back-btn" onclick="goTo('page-main')">← Back</button>
+  <button class="back-btn" onclick="goTo('page-main')">← <span data-i18n="back">Back</span></button>
   <div class="vip-card">
-    <div class="vt">🎉 You found the QR VIP Perk!</div>
-    <p>You unlocked this by tapping the clinic name 5 times — nice. Show this exact screen at Soul Veterinary Clinic Al Ain for an extra QR-scanner perk on your next visit.</p>
+    <div class="vt">🎉 <span data-i18n="vipTitle">You found the QR VIP Perk!</span></div>
+    <p data-i18n="vipBody">You unlocked this by tapping the clinic name 5 times — nice. Show this exact screen at Soul Veterinary Clinic Al Ain for an extra QR-scanner perk on your next visit.</p>
     <div class="vip-code">COCO-QR-VIP</div>
-    <p style="margin-top:16px;font-size:11.5px;opacity:.7">Prasant: set the actual perk (e.g. free nail trim, % off grooming) once agreed with the clinic.</p>
+    <p style="margin-top:16px;font-size:11.5px;opacity:.7" data-i18n="vipNote">Prasant: set the actual perk (e.g. free nail trim, % off grooming) once agreed with the clinic.</p>
   </div>
 </div>
 
 <!-- COCO PET CARE bottom-left badge (Prasant's own attribution / contact) -->
 <a class="coco-brand" href="https://wa.me/971505022110?text=Hello%2C+Coco+Pet+Care%2C+I+would+like+to+get+your+service" target="_blank" rel="noopener">
   <span class="cb-icon">🐾</span>
-  <div><div class="cb-text">COCO PET CARE</div><div class="cb-sub">QR partner · tap to reach us</div></div>
+  <div><div class="cb-text">COCO PET CARE</div><div class="cb-sub" data-i18n="cocoSub">QR partner · tap to reach us</div></div>
 </a>
 
 <a class="brand" href="https://udesign999-bot.github.io/" target="_blank" rel="noopener" aria-label="U-Design — We Print">
@@ -380,6 +403,142 @@ function tapName(){
     goTo('page-vip');
   }
 }
+
+/* ===== LANGUAGE TOGGLE (EN / AR) ===== */
+const translations = {
+  en: {
+    demoTitle: "⚠ DEMO WEBSITE", demoBody: "please refer to the official Soul Vet website for full & current details. Thank you.",
+    giftLabel: "OFFERS",
+    clinicName: "SOUL VETERINARY CLINIC AL AIN",
+    clinicSub: "Advanced Veterinary Care · Fair Prices · One Soul Standard",
+    hl1: "24/7 Helpline", hl2: "Falcon & Exotic Care", hl3: "Fixed Pricing", hl4: "Pick-Up & Drop-Off", hl5: "TNR Community Care",
+    aboutTitle: "About Soul Vet", aboutTitle2: "About Soul Vet",
+    aboutBody: "Part of the Soul Vet Clinics network, built on one belief: pets deserve outstanding medical care in a place that feels warm, trustworthy and easy to access. Every branch runs on the same standard — experienced vets, modern equipment, transparent pricing and real love for animals, from routine check-ups to surgery and exotic/falcon care.",
+    branches: "Branches: Al Ain · Ajman · Dubai", foundedBy: "Founded by the Soul Vet team",
+    foundedNote: "(founding year & founder name — confirm with clinic for this line)",
+    callUs: "CALL US", whatsappBtn: "WHATSAPP", locationBtn: "LOCATION",
+    cardWebsite: "Official Website", cardWebsiteSub: "alain.soulvet.ae — full details, always up to date",
+    cardServices: "Our Services", cardServicesSub: "Tap to view what we treat",
+    cardInsta: "Instagram", cardInstaSub: "@soulvetclinic — follow for offers & updates",
+    cardFb: "Facebook", cardFbSub: "Soul Veterinary Clinic — like the page",
+    cardTiktok: "TikTok", cardTiktokSub: "@soulvetclinic — watch clinic videos",
+    cardYt: "YouTube", cardYtSub: "No official channel confirmed yet — searches for their videos",
+    reviewTitle: "See Reviews & Rate Us on Google Maps",
+    reviewNote: "Tap to open Soul Veterinary Clinic Al Ain's Google listing — read reviews or leave your own",
+    footerQr: "QR experience by Coco Pet Care × U-Design",
+    back: "Back", tapDetails: "Tap for details",
+    svcConsult: "General Consultation & Health Checks", svcVaccine: "Vaccinations & Preventive Care",
+    svcSurgery: "Surgery", svcWellness: "Wellness Exams", svcCardio: "Cardiology", svcDental: "Dental Care",
+    svcGrooming: "Grooming", svcBoarding: "Boarding",
+    svcPickup: "Pick-Up & Drop-Off Service", svcPickupSub: "Convenience add-on · ask for coverage area",
+    whatsIncluded: "What's Included",
+    mTConsult: "General Consultation", mTVaccine: "Vaccinations & Preventive Care", mTSurgery: "Surgery",
+    mTWellness: "Wellness Exams", mTCardio: "Cardiology", mTDental: "Dental Care", mTGrooming: "Grooming",
+    mTBoarding: "Boarding", mTPickup: "Pick-Up & Drop-Off",
+    mLConsult1: "Routine examination & wellness visit", mLConsult2: "Preventive care advice", mLConsult3: "Ongoing health monitoring",
+    mLVaccine1: "Protection against rabies, parvovirus, distemper & more", mLVaccine2: "Full physical exam", mLVaccine3: "Vaccine record & reminders",
+    mLSurgery1: "Routine to advanced surgical procedures", mLSurgery2: "Medical precision & patient-safety protocols", mLSurgery3: "Post-op care guidance",
+    mLWellness1: "Complete physical examination", mLWellness2: "Health assessment", mLWellness3: "Preventive care plan",
+    mLCardio1: "Expert cardiac care", mLCardio2: "Early detection of heart conditions", mLCardio3: "Advanced treatment plans",
+    mLDental1: "Oral health assessment", mLDental2: "Dental support & cleaning", mLDental3: "Long-term comfort care",
+    mLGrooming1: "Brushing & sanitary trimming", mLGrooming2: "Refreshing bath", mLGrooming3: "Coat maintenance",
+    mLBoarding1: "Secure boarding", mLBoarding2: "Constant supervision", mLBoarding3: "Comfortable home-like environment",
+    pickupFee: "Ask for coverage & fee",
+    mLPickup1: "Convenient support for busy pet parents", mLPickup2: "Helps reduce stress for the pet", mLPickup3: "Available for consultations & selected treatments",
+    waBook: "Book via WhatsApp", waEnquire: "Enquire via WhatsApp", waAsk: "Ask via WhatsApp",
+    offersTitle: "This Month's Offers",
+    offer1t: "Vaccination & Wellness Package", offer1d: "Ask about the current bundle price — Soul Vet rotates this offer monthly.",
+    offer2t: "Dental Care Special", offer2d: "Seasonal discount on scaling & polishing — confirm this week's rate on WhatsApp.",
+    offer3t: "Community TNR Pricing", offer3d: "Special reduced pricing for trap-neuter-return community cats.",
+    offer4t: "Free Pick-Up & Drop-Off", offer4d: "On selected consultations & follow-ups — ask if your visit qualifies.",
+    offerNote: "Discount prices change often, so they're kept off the fixed services list — always confirm the live offer here or on WhatsApp before booking.",
+    offerBtn: "Ask About Today's Offer",
+    vipTitle: "You found the QR VIP Perk!",
+    vipBody: "You unlocked this by tapping the clinic name 5 times — nice. Show this exact screen at Soul Veterinary Clinic Al Ain for an extra QR-scanner perk on your next visit.",
+    vipNote: "Prasant: set the actual perk (e.g. free nail trim, % off grooming) once agreed with the clinic.",
+    cocoSub: "QR partner · tap to reach us",
+    mq1: "🎁 BEST DEALS AVAILABLE AT SOUL VETERINARY CLINIC AL AIN — Fixed, fair pricing across every branch",
+    mq2: "💉 Ask about this month's vaccination & wellness package offer",
+    mq3: "🐾 TNR & community welfare special pricing available",
+    mq4: "🚗 Free pick-up & drop-off support for selected visits",
+    mq5: "🎁 Tap the gift icon for this month's full offer list →"
+  },
+  ar: {
+    demoTitle: "⚠ موقع تجريبي", demoBody: "يرجى الرجوع إلى الموقع الرسمي لعيادة سول البيطرية لكافة التفاصيل الحالية. شكرًا لكم.",
+    giftLabel: "العروض",
+    clinicName: "عيادة سول البيطرية العين",
+    clinicSub: "رعاية بيطرية متقدمة · أسعار عادلة · معيار سول الموحد",
+    hl1: "دعم هاتفي على مدار الساعة", hl2: "رعاية الصقور والحيوانات النادرة", hl3: "أسعار ثابتة", hl4: "خدمة الاستلام والتوصيل", hl5: "رعاية مجتمعية لتحديد النسل (TNR)",
+    aboutTitle: "عن سول فيت", aboutTitle2: "عن سول فيت",
+    aboutBody: "جزء من شبكة عيادات سول فيت، مبنية على إيمان واحد: حيواناتك الأليفة تستحق رعاية طبية متميزة في مكان يشعرك بالدفء والثقة وسهولة الوصول. كل فرع يعمل وفق نفس المعيار — أطباء ذوو خبرة، معدات حديثة، أسعار شفافة وحب حقيقي للحيوانات، من الفحوصات الروتينية إلى الجراحة ورعاية الصقور والحيوانات النادرة.",
+    branches: "الفروع: العين · عجمان · دبي", foundedBy: "أسسها فريق سول فيت",
+    foundedNote: "(سنة التأسيس واسم المؤسس — يُرجى التأكيد مع العيادة)",
+    callUs: "اتصل بنا", whatsappBtn: "واتساب", locationBtn: "الموقع",
+    cardWebsite: "الموقع الرسمي", cardWebsiteSub: "alain.soulvet.ae — التفاصيل الكاملة والمحدثة دائمًا",
+    cardServices: "خدماتنا", cardServicesSub: "اضغط لعرض ما نقدمه من علاج",
+    cardInsta: "إنستغرام", cardInstaSub: "@soulvetclinic — تابعونا للعروض والتحديثات",
+    cardFb: "فيسبوك", cardFbSub: "عيادة سول البيطرية — أعجبني للصفحة",
+    cardTiktok: "تيك توك", cardTiktokSub: "@soulvetclinic — شاهد فيديوهات العيادة",
+    cardYt: "يوتيوب", cardYtSub: "لم يتم تأكيد القناة الرسمية بعد — يبحث عن فيديوهاتهم",
+    reviewTitle: "شاهد التقييمات وقيّمنا على خرائط غوغل",
+    reviewNote: "اضغط لفتح صفحة عيادة سول البيطرية العين على غوغل — اقرأ التقييمات أو أضف تقييمك",
+    footerQr: "تجربة QR من Coco Pet Care × U-Design",
+    back: "رجوع", tapDetails: "اضغط للتفاصيل",
+    svcConsult: "استشارة عامة وفحوصات صحية", svcVaccine: "التطعيمات والرعاية الوقائية",
+    svcSurgery: "الجراحة", svcWellness: "فحوصات العافية", svcCardio: "أمراض القلب", svcDental: "رعاية الأسنان",
+    svcGrooming: "التجميل والعناية", svcBoarding: "الإقامة والنزيل",
+    svcPickup: "خدمة الاستلام والتوصيل", svcPickupSub: "خدمة إضافية للراحة · اسأل عن منطقة التغطية",
+    whatsIncluded: "ما تشمله الخدمة",
+    mTConsult: "استشارة عامة", mTVaccine: "التطعيمات والرعاية الوقائية", mTSurgery: "الجراحة",
+    mTWellness: "فحوصات العافية", mTCardio: "أمراض القلب", mTDental: "رعاية الأسنان", mTGrooming: "التجميل والعناية",
+    mTBoarding: "الإقامة والنزيل", mTPickup: "الاستلام والتوصيل",
+    mLConsult1: "فحص روتيني وزيارة عافية", mLConsult2: "نصائح الرعاية الوقائية", mLConsult3: "متابعة صحية مستمرة",
+    mLVaccine1: "الحماية من داء الكلب والبارفو والطاعون وأكثر", mLVaccine2: "فحص جسدي كامل", mLVaccine3: "سجل التطعيمات والتذكيرات",
+    mLSurgery1: "إجراءات جراحية روتينية ومتقدمة", mLSurgery2: "دقة طبية وبروتوكولات السلامة", mLSurgery3: "إرشادات الرعاية بعد الجراحة",
+    mLWellness1: "فحص جسدي شامل", mLWellness2: "تقييم الحالة الصحية", mLWellness3: "خطة رعاية وقائية",
+    mLCardio1: "رعاية متخصصة للقلب", mLCardio2: "الكشف المبكر عن أمراض القلب", mLCardio3: "خطط علاج متقدمة",
+    mLDental1: "تقييم صحة الفم", mLDental2: "عناية وتنظيف الأسنان", mLDental3: "راحة طويلة الأمد",
+    mLGrooming1: "تنظيف وتشذيب صحي", mLGrooming2: "استحمام منعش", mLGrooming3: "العناية بالفرو",
+    mLBoarding1: "إقامة آمنة", mLBoarding2: "إشراف مستمر", mLBoarding3: "بيئة مريحة تشبه المنزل",
+    pickupFee: "اسأل عن التغطية والرسوم",
+    mLPickup1: "دعم مناسب لأصحاب الحيوانات المشغولين", mLPickup2: "يقلل التوتر عن الحيوان الأليف", mLPickup3: "متاح للاستشارات وبعض العلاجات",
+    waBook: "احجز عبر واتساب", waEnquire: "استفسر عبر واتساب", waAsk: "اسأل عبر واتساب",
+    offersTitle: "عروض هذا الشهر",
+    offer1t: "باقة التطعيم والعافية", offer1d: "اسأل عن سعر الباقة الحالي — يتغير هذا العرض شهريًا في سول فيت.",
+    offer2t: "عرض خاص لرعاية الأسنان", offer2d: "خصم موسمي على التنظيف والتلميع — تأكد من سعر هذا الأسبوع عبر واتساب.",
+    offer3t: "أسعار خاصة لتحديد النسل المجتمعي (TNR)", offer3d: "أسعار مخفضة خاصة لقطط الشوارع ضمن برنامج TNR.",
+    offer4t: "استلام وتوصيل مجاني", offer4d: "لبعض الاستشارات والمتابعات — اسأل إن كانت زيارتك مؤهلة.",
+    offerNote: "أسعار العروض تتغير باستمرار، لذلك لا تُدرج في قائمة الخدمات الثابتة — تأكد دائمًا من العرض الحالي هنا أو عبر واتساب قبل الحجز.",
+    offerBtn: "اسأل عن عرض اليوم",
+    vipTitle: "لقد وجدت مكافأة VIP الخاصة برمز QR!",
+    vipBody: "لقد فتحت هذه الصفحة بالضغط على اسم العيادة 5 مرات — أحسنت. أظهر هذه الشاشة بالضبط في عيادة سول البيطرية العين للحصول على مكافأة إضافية خاصة بماسح QR في زيارتك القادمة.",
+    vipNote: "ملاحظة لبراسانت: حدد المكافأة الفعلية (مثل تقليم أظافر مجاني أو نسبة خصم على التجميل) بعد الاتفاق مع العيادة.",
+    cocoSub: "شريك QR · اضغط للتواصل معنا",
+    mq1: "🎁 أفضل العروض متوفرة الآن في عيادة سول البيطرية العين — أسعار ثابتة وعادلة في كل فرع",
+    mq2: "💉 اسأل عن عرض التطعيم وباقة العافية لهذا الشهر",
+    mq3: "🐾 أسعار خاصة متوفرة لرعاية ورفاهية المجتمع (TNR)",
+    mq4: "🚗 خدمة استلام وتوصيل مجانية لبعض الزيارات",
+    mq5: "🎁 اضغط على أيقونة الهدية لعرض جميع عروض هذا الشهر ←"
+  }
+};
+
+function setLang(lang){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    const txt = translations[lang] && translations[lang][key];
+    if(txt !== undefined) el.textContent = txt;
+  });
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+  try{ localStorage.setItem('soulvet-lang', lang); }catch(e){}
+}
+(function(){
+  let saved = 'en';
+  try{ saved = localStorage.getItem('soulvet-lang') || 'en'; }catch(e){}
+  setLang(saved);
+})();
 </script>
 </body>
 </html>
